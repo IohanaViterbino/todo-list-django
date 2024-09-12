@@ -1,9 +1,7 @@
-from django.http import JsonResponse
+from rest_framework import viewsets
+from .models import Task, User
+from .serializer import TaskSerializer, UserSerializer
 
-# Create your views here.
-
-def tarefa(request):
-    if request.method == 'GET':
-        tarefa = {'id': 1234, 'atividade': 'Estudar para o curso Backend'}
-        return JsonResponse(tarefa)
-
+class TaskViewSet(viewsets.ModelViewSet):
+	queryset = Task.objects.all()
+	serializer_class = TaskSerializer

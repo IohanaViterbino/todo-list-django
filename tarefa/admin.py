@@ -1,10 +1,12 @@
 from django.contrib import admin
 from tarefa.models import Task
-# Register your models here.
 
-class tasksAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', ' description', ' created_at', 'due_date', ' completed' )
-    list_display_links = ('id', 'title')
+class TasksAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'title', 'due_date', 'completed' )
+    list_filter = ['user', 'completed']
+    list_display_links = ('id', 'title',)
+    list_editable = ('completed',)
     search_fields = ('title',)
+    list_per_page = 10
 
-admin.site.register(Task, tasksAdmin)
+admin.site.register(Task, TasksAdmin)
