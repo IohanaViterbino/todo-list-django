@@ -1,8 +1,12 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from .models import Task, Comment, Tag
 from .serializer import TaskSerializer, CommentSerializer, TagSerializer
 
 class TaskViewSet(viewsets.ModelViewSet):
+	queryset = Task.objects.all()
+	serializer_class = TaskSerializer
+
+class TaskRetrieveView(generics.RetrieveAPIView):
 	queryset = Task.objects.all()
 	serializer_class = TaskSerializer
 

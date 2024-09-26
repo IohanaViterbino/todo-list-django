@@ -1,4 +1,4 @@
-from tarefa.views import TaskViewSet, CommentViewSet, TagViewSet
+from tarefa.views import TaskViewSet, CommentViewSet, TagViewSet, TaskRetrieveView
 from rest_framework import routers
 from django.urls import path, include
 
@@ -9,4 +9,5 @@ router.register(r'comments', CommentViewSet, basename='comments')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('task/<int:pk>/', TaskRetrieveView.as_view(), name='task-retrieve'),
 ]
