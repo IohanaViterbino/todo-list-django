@@ -17,7 +17,7 @@ class Task(models.Model):
     due_date = models.DateField(null=True, blank=True) 
     completed = models.BooleanField(default=False)
     completed_at = models.DateTimeField(null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
+    fk_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
     category = models.CharField(max_length=1, choices=CATEGORY_NAME, default='I', null=False, blank=False)
 
     def __str__(self):

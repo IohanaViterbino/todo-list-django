@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
 		fields = ['id', 'username']
 
 class TaskSerializer(serializers.ModelSerializer):
-	user = UserSerializer(read_only=True)
+	user = UserSerializer(source= 'fk_user',read_only=True)
 
 	class Meta:
 		model = Task
@@ -23,6 +23,7 @@ class TagSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
 	tasks = TaskSerializer(source='fk_task', read_only=True)
+	user = UserSerializer(source='fk_user', read_only=True)
 	class Meta:
 		model = Comment
 		fields = '__all__'
