@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Task, User, Comment, Tag
+from .models import Task, User, Comment, Tag, Notification, Attachment
 
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -27,3 +27,21 @@ class CommentSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Comment
 		fields = '__all__'
+
+class NotificationSerializer(serializers.ModelSerializer):
+	user = UserSerializer(source='fk_user', read_only=True)
+	class Meta:
+		model = Notification
+		fields = '__all__'
+
+class AttachmentSerializer(serializers.ModelSerializer):
+	user = UserSerializer(source='fk_user', read_only=True)
+	task = TaskSerializer(source='fk_task', read_only=True)
+	class Meta:
+		model = Attachment
+		fields = '__all__'
+
+class CommentListSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Comment
+		fields = ['fk_user', 'comment_text', 'fk_task']

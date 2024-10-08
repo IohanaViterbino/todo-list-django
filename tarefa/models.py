@@ -44,3 +44,21 @@ class Comment(models.Model):
     def __str__(self):
         return self.comment_text
   
+class Notification(models.Model):
+    fk_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    title = models.TextField(blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
+    notification_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+class Attachment(models.Model):
+    attachment_name = models.CharField(null=False, max_length=100)
+    fk_task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='attachments')
+    fk_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='attachments')
+    attachment = models.FileField(upload_to='attachments/')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.attachment_name
