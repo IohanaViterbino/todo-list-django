@@ -1,6 +1,6 @@
 from tarefa.views import (
     TaskViewSet, CommentViewSet, TagViewSet, TaskRetrieveView, NotificationViewSet, AttachmentViewSet,
-    CommentListView
+    CommentListView, TagListView
 )
 from rest_framework import routers
 from django.urls import path, include
@@ -16,4 +16,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('task/<int:pk>/', TaskRetrieveView.as_view(), name='task-retrieve'),
     path('task/<int:pk>/comments/', CommentListView.as_view(), name='comment-list'),
+    path('task/<int:pk>/tags/', TagListView.as_view(), name='tag-list'),
 ]

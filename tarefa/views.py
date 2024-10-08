@@ -2,7 +2,7 @@ from rest_framework import viewsets, generics
 from .models import Task, Comment, Tag, Notification, Attachment
 from .serializer import (
 	TaskSerializer, CommentSerializer, TagSerializer, NotificationSerializer, AttachmentSerializer,
-	CommentListSerializer
+	CommentListSerializer, TagListSerializer
 )
 class TaskViewSet(viewsets.ModelViewSet):
 	queryset = Task.objects.all()
@@ -33,4 +33,11 @@ class CommentListView(generics.ListAPIView):
 	serializer_class = CommentListSerializer
 	def get_queryset(self):
 		queryset = Comment.objects.filter(fk_task=self.kwargs['pk'])
+		return queryset
+
+class TagListView(generics.ListAPIView):
+	''' lista de tags por tarefa '''
+	serializer_class = TagListSerializer
+	def get_queryset(self):
+		queryset = Tag.objects.filter(tasks=self.kwargs['pk'])
 		return queryset

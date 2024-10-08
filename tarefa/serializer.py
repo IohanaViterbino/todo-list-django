@@ -22,7 +22,6 @@ class TagSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 class CommentSerializer(serializers.ModelSerializer):
-	tasks = TaskSerializer(source='fk_task', read_only=True)
 	user = UserSerializer(source='fk_user', read_only=True)
 	class Meta:
 		model = Comment
@@ -45,3 +44,8 @@ class CommentListSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Comment
 		fields = ['fk_user', 'comment_text', 'fk_task']
+
+class TagListSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Tag
+		fields = ['tag_name']
